@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anouar Guermazi | Robotique, Automatique & Machine Learning</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0d14',
+                        darkcard: '#121826',
+                        darkborder: '#1e293b',
+                        accent: '#38bdf8',
+                        accentglow: '#0284c7',
+                        techgreen: '#10b981'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a0d14;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+        }
+        .grid-bg {
+            background-image: radial-gradient(rgba(56, 189, 248, 0.07) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+        }
+        .code-accent {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-sky-500/40 text-sky-300 px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3">
+        <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-message" class="text-sm font-mono">Copié dans le presse-papier !</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-darkbg/80 border-b border-darkborder/60">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold font-mono tracking-wider text-sky-400 hover:text-sky-300 transition-colors">
+                ag<span class="text-white">.</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-sky-400 transition-colors">À Propos</a>
+                <a href="#academic" class="hover:text-sky-400 transition-colors">Parcours</a>
+                <a href="#projects" class="hover:text-sky-400 transition-colors">Projets</a>
+                <a href="#research" class="hover:text-sky-400 transition-colors">Rapports & Certifs</a>
+                <a href="#contact" class="hover:text-sky-400 transition-colors">Contact</a>
+            </nav>
+            <a href="https://github.com" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg text-xs font-mono bg-darkcard border border-darkborder hover:border-sky-500/50 text-slate-200 hover:text-sky-400 transition-all">
+                <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-12 space-y-24">
+
+        <!-- Hero Section -->
+        <section id="about" class="pt-8 space-y-6">
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-950/60 border border-sky-500/30 text-sky-400 text-xs font-mono">
+                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <span>Recherche de Stage de Césure • 2025/2026</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                Anouar Guermazi
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-400 max-w-3xl font-light">
+                Perception. Learning. Motion.
+            </p>
+            <p class="text-slate-300 max-w-2xl leading-relaxed">
+                Étudiant ingénieur à <strong class="text-white">CentraleSupélec</strong>, spécialisé en robotique, automatique et machine learning. Passionné par le contrôle de systèmes dynamiques complexes, la synthèse de correcteurs et l'apprentissage par renforcement.
+            </p>
+
+            <!-- Langues & Quick Info -->
+            <div class="pt-2 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+                <div class="flex items-center space-x-2 bg-darkcard px-3 py-2 rounded-lg border border-darkborder">
+                    <span class="text-sky-400">🌐 Langues:</span>
+                    <span class="text-slate-200">Français (Natif) • English (C1/Fluide) • Arabe (Natif)</span>
+                </div>
+                <div class="flex items-center space-x-2 bg-darkcard px-3 py-2 rounded-lg border border-darkborder">
+                    <span class="text-sky-400">🎯 Domaines:</span>
+                    <span class="text-slate-200">Robotique, Automatique, Data Science, Deep Learning</span>
+                </div>
+            </div>
+
+            <div class="pt-4 flex flex-wrap gap-4">
+                <a href="#projects" class="px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition-all shadow-lg shadow-sky-500/20">
+                    Explorer mes projets
+                </a>
+                <a href="#contact" class="px-6 py-3 rounded-xl bg-darkcard border border-darkborder hover:border-sky-500/40 text-slate-200 text-sm font-medium transition-all">
+                    Me contacter
+                </a>
+            </div>
+        </section>
+
+        <!-- Academic Background Section -->
+        <section id="academic" class="space-y-8">
+            <div class="border-b border-darkborder pb-4">
+                <h2 class="text-2xl font-bold font-mono text-white flex items-center gap-3">
+                    <span class="text-sky-400">//</span> Academic Background
+                </h2>
+                <p class="text-sm text-slate-400 mt-1">Formation théorique avancée et excellence académique</p>
+            </div>
+
+            <div class="relative border-l-2 border-darkborder pl-6 ml-2 md:ml-4 space-y-10">
+                <!-- CentraleSupélec -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-sky-500 border-4 border-darkbg group-hover:scale-125 transition-transform"></div>
+                    <div class="bg-darkcard p-6 rounded-2xl border border-darkborder glow-effect transition-all space-y-2">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <h3 class="text-lg font-bold text-white">CentraleSupélec</h3>
+                            <span class="text-xs font-mono text-sky-400 bg-sky-950/40 px-2.5 py-1 rounded border border-sky-800/40">2023 - Présent</span>
+                        </div>
+                        <p class="text-sm text-slate-300 font-medium">Diplôme d'Ingénieur Généraliste</p>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-2">
+                            <strong class="text-slate-200">Cours majeurs :</strong> Systèmes dynamiques & Automatique, Apprentissage par renforcement (RL), Équations aux dérivées partielles (EDP), Traitement du signal, Statistique & Optimisation mathématique.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- NTU Singapore -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-600 border-4 border-darkbg group-hover:scale-125 group-hover:bg-sky-400 transition-all"></div>
+                    <div class="bg-darkcard p-6 rounded-2xl border border-darkborder glow-effect transition-all space-y-2">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <h3 class="text-lg font-bold text-white">Nanyang Technological University (NTU)</h3>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800/40 px-2.5 py-1 rounded border border-slate-700/40">Singapour</span>
+                        </div>
+                        <p class="text-sm text-slate-300 font-medium">Échange Académique International</p>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-2">
+                            Immersion au cœur de laboratoires de pointe. Approfondissement en robotique autonome, vision par ordinateur et commande avancée.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Lycée Louis-le-Grand -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-600 border-4 border-darkbg group-hover:scale-125 group-hover:bg-sky-400 transition-all"></div>
+                    <div class="bg-darkcard p-6 rounded-2xl border border-darkborder glow-effect transition-all space-y-2">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <h3 class="text-lg font-bold text-white">Lycée Louis-le-Grand</h3>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800/40 px-2.5 py-1 rounded border border-slate-700/40">Paris • 2021 - 2023</span>
+                        </div>
+                        <p class="text-sm text-slate-300 font-medium">Classes Préparatoires aux Grandes Écoles (PCSI / PSI*)</p>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-2">
+                            Formation scientifique intensive en mathématiques pures, physique théorique et sciences de l'ingénieur.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Projects Section -->
+        <section id="projects" class="space-y-8">
+            <div class="border-b border-darkborder pb-4 flex flex-wrap justify-between items-end gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold font-mono text-white flex items-center gap-3">
+                        <span class="text-sky-400">//</span> Technical Projects
+                    </h2>
+                    <p class="text-sm text-slate-400 mt-1">Conception matérielle, modélisation physique & algorithmes de contrôle</p>
+                </div>
+            </div>
+
+            <!-- Category 1: Ongoing Projects -->
+            <div class="space-y-4">
+                <div class="flex items-center space-x-2 text-xs font-mono text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="uppercase tracking-wider">Projets En Cours (Ongoing)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                    <!-- Project Open Duck Mini -->
+                    <div class="bg-darkcard rounded-2xl border border-darkborder p-6 md:p-8 glow-effect transition-all flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold text-white">Open Duck Mini</h3>
+                                <span class="px-2.5 py-1 rounded text-xs font-mono bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">En cours</span>
+                            </div>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Assemblage matériel et configuration logicielle d'un robot open-source articulé. Intégration des pièces imprimées en 3D, câblage des actuateurs, gestion du bus de communication et paramétrage du modèle de marche dynamique.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Robotique</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Hardware</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">3D Printing</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Bus Servomoteurs</span>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-darkborder/50 flex justify-between items-center text-xs font-mono text-slate-400">
+                            <span>Status: Assemblage & Calibration dynamique</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 2: Completed Projects -->
+            <div class="space-y-4 pt-4">
+                <div class="flex items-center space-x-2 text-xs font-mono text-sky-400">
+                    <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                    <span class="uppercase tracking-wider">Projets Terminés (Completed)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Project 1: Cubli -->
+                    <div class="bg-darkcard rounded-2xl border border-darkborder p-6 glow-effect transition-all flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold text-white">Cubli : Reaction-Wheel Balancing Robot</h3>
+                                <span class="px-2.5 py-1 rounded text-xs font-mono bg-sky-950/60 text-sky-400 border border-sky-800/40">Terminé</span>
+                            </div>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Modélisation électromécanique et commande en boucle fermée d'un cube robotique en équilibre sur une arête via une roue de réaction. Synthèse d'un correcteur PID et résolution des instabilités électriques matérielles par intégration d'une alimentation stabilisée externe.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Automatique</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">PID Tuning</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Simulink</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Hard-Tech</span>
+                            </div>
+                        </div>
+                        <button onclick="openModal('cubli')" class="w-full py-2.5 rounded-xl bg-sky-500/10 border border-sky-500/30 hover:bg-sky-500/20 text-sky-400 font-mono text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Ouvrir l'atelier interactif PID & Détails
+                        </button>
+                    </div>
+
+                    <!-- Project 2: TMD Active Control -->
+                    <div class="bg-darkcard rounded-2xl border border-darkborder p-6 glow-effect transition-all flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold text-white">Contrôle Actif TMD & Deep RL (TIPE)</h3>
+                                <span class="px-2.5 py-1 rounded text-xs font-mono bg-sky-950/60 text-sky-400 border border-sky-800/40">Terminé</span>
+                            </div>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Atténuation active des vibrations mécaniques par amortisseurs à masse accordée (TMD). Implémentation d'architectures Deep Learning sous PyTorch (LSTM/GRU) et d'agents de RL (DQN, DDPG) pour l'ajustement dynamique de l'amortissement.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">Python</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">PyTorch</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">DDPG / RL</span>
+                                <span class="bg-darkbg px-2.5 py-1 rounded border border-darkborder">LSTM</span>
+                            </div>
+                        </div>
+                        <button onclick="openModal('tmd')" class="w-full py-2.5 rounded-xl bg-darkbg border border-darkborder hover:border-slate-600 text-slate-300 font-mono text-xs transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            Voir la synthèse technique
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Research Reports Section -->
+        <section id="research" class="space-y-8">
+            <div class="border-b border-darkborder pb-4">
+                <h2 class="text-2xl font-bold font-mono text-white flex items-center gap-3">
+                    <span class="text-sky-400">//</span> Certifications & LaTeX Reports
+                </h2>
+                <p class="text-sm text-slate-400 mt-1">Documentation scientifique rigoureuse et qualifications</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Research Papers -->
+                <div class="bg-darkcard p-6 rounded-2xl border border-darkborder space-y-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        Rapports Techniques LaTeX
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Accès aux documents de modélisation complète rédigés en LaTeX (équations de Lagrange, dynamique électromécanique, preuves de stabilité).
+                    </p>
+                    <div class="space-y-2 pt-2">
+                        <a href="#" onclick="copyToast('Rapport PDF disponible prochainement')" class="block p-3 rounded-xl bg-darkbg border border-darkborder hover:border-sky-500/40 text-xs font-mono text-slate-300 flex justify-between items-center transition-all">
+                            <span>📄 Modélisation_Cubli_CentraleSupélec.pdf</span>
+                            <span class="text-sky-400">PDF ↓</span>
+                        </a>
+                        <a href="#" onclick="copyToast('Rapport PDF disponible prochainement')" class="block p-3 rounded-xl bg-darkbg border border-darkborder hover:border-sky-500/40 text-xs font-mono text-slate-300 flex justify-between items-center transition-all">
+                            <span>📄 Etude_Controle_Actif_TMD_RL.pdf</span>
+                            <span class="text-sky-400">PDF ↓</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="bg-darkcard p-6 rounded-2xl border border-darkborder space-y-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                        Certifications Spécialisées
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Formations complémentaires prévues ou en cours d'obtention pour enrichir le profil en Machine Learning et Robotique.
+                    </p>
+                    <div class="space-y-2 pt-2">
+                        <div class="p-3 rounded-xl bg-darkbg border border-darkborder text-xs font-mono text-slate-400 flex justify-between items-center">
+                            <span>Deep Learning Specialization (Coursera / DeepLearning.AI)</span>
+                            <span class="text-amber-400">En cours</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-darkbg border border-darkborder text-xs font-mono text-slate-400 flex justify-between items-center">
+                            <span>ROS2 Robotics Developer (ConstructSim)</span>
+                            <span class="text-slate-500">Prévu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Contact Section -->
+        <section id="contact" class="pt-8 border-t border-darkborder space-y-6">
+            <div class="bg-darkcard p-8 rounded-2xl border border-darkborder glow-effect flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <h3 class="text-xl font-bold text-white">Discutons de mon stage de césure</h3>
+                    <p class="text-xs text-slate-400">Disponible pour échanger sur vos opportunités en Robotique, Automatique & Data Science.</p>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="copyToClipboard('anouar.guermazi@centralesupelec.fr')" class="px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-mono text-xs font-bold transition-all flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Copier l'Email
+                    </button>
+                    <a href="https://github.com" target="_blank" class="px-5 py-3 rounded-xl bg-darkbg border border-darkborder hover:border-sky-500/40 text-slate-200 font-mono text-xs transition-all flex items-center gap-2">
+                        GitHub Profile ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center text-xs font-mono text-slate-600 pt-6">
+                © 2026 Anouar Guermazi • Conçu avec rigueur & précision technique.
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Project Detail / Interactive Simulation -->
+    <div id="modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-darkcard border border-darkborder w-full max-w-3xl rounded-2xl p-6 md:p-8 space-y-6 max-h-[90vh] overflow-y-auto relative">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white font-mono text-xl">✕</button>
+            
+            <div id="modal-content">
+                <!-- Dynamic Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Modal & Interactive PID logic
+        let pidInterval = null;
+        let theta = 0.3; // Initial angle tilt (radians)
+        let dTheta = 0;
+        let integral = 0;
+
+        function openModal(projectKey) {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+
+            if (projectKey === 'cubli') {
+                content.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="border-b border-darkborder pb-4">
+                            <span class="text-xs font-mono text-sky-400">Atelier Interactif & Synthèse</span>
+                            <h2 class="text-2xl font-bold text-white mt-1">Cubli : Reaction-Wheel Robot</h2>
+                        </div>
+                        
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Ajustez les gains du contrôleur PID ci-dessous pour stabiliser le cube (pendule inversé sur une roue de réaction) contre la gravité.
+                        </p>
+
+                        <!-- Canvas Simulation -->
+                        <div class="bg-darkbg p-4 rounded-xl border border-darkborder flex flex-col items-center justify-center relative">
+                            <canvas id="pidCanvas" width="300" height="200" class="w-full max-w-[300px] h-[200px]"></canvas>
+                            <button onclick="applyPerturbation()" class="mt-3 px-3 py-1.5 bg-rose-500/20 border border-rose-500/40 text-rose-300 font-mono text-xs rounded-lg hover:bg-rose-500/30">
+                                ⚡ Appliquer un choc (Perturbation)
+                            </button>
+                        </div>
+
+                        <!-- PID Sliders -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-darkbg p-4 rounded-xl border border-darkborder font-mono text-xs">
+                            <div>
+                                <label class="flex justify-between text-slate-300">
+                                    <span>Gain Proportionnel (Kp):</span>
+                                    <span id="kp-val" class="text-sky-400">45</span>
+                                </label>
+                                <input type="range" id="kp" min="0" max="100" value="45" class="w-full mt-2 accent-sky-400" oninput="updatePidVals()">
+                            </div>
+                            <div>
+                                <label class="flex justify-between text-slate-300">
+                                    <span>Gain Dérivé (Kd):</span>
+                                    <span id="kd-val" class="text-sky-400">8</span>
+                                </label>
+                                <input type="range" id="kd" min="0" max="30" value="8" class="w-full mt-2 accent-sky-400" oninput="updatePidVals()">
+                            </div>
+                        </div>
+
+                        <!-- Detail technique -->
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <h4 class="font-bold text-white font-mono">// Challenge Matériel Résolu</h4>
+                            <p class="leading-relaxed">
+                                Lors des essais expérimentaux, la batterie embarquée présentait des chocs de tension causés par les forts piques d'intensité réclamés par le moteur de la roue de réaction lors des corrections brusques. <strong>Solution d'ingénieur :</strong> Passage temporaire sur alimentation stabilisée externe pour isoler la chaîne de puissance de la carte microcontrôleur et valider l'asservissement.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                initPidSim();
+            } else if (projectKey === 'tmd') {
+                content.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="border-b border-darkborder pb-4">
+                            <span class="text-xs font-mono text-sky-400">Rapport de Synthèse</span>
+                            <h2 class="text-2xl font-bold text-white mt-1">Contrôle Actif TMD par Reinforcement Learning</h2>
+                        </div>
+                        <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+                            <p>
+                                Ce projet/TIPE explore l'utilisation des algorithmes d'apprentissage par renforcement dans des espaces d'actions continus (<strong class="text-sky-400">DDPG</strong>) et discrets (<strong class="text-sky-400">DQN</strong>) pour amortir activement les oscillations mécaniques des structures soumises à un séisme ou au vent.
+                            </p>
+                            <div class="bg-darkbg p-4 rounded-xl border border-darkborder space-y-2 font-mono text-slate-400">
+                                <div class="text-white font-bold">Stack Algorithmique :</div>
+                                <div>• Network Architecture: LSTM/GRU (Capteurs temporels)</div>
+                                <div>• Environment: Simulation physique sous Python (SciPy/Gym)</div>
+                                <div>• RL Library: PyTorch</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            if (pidInterval) clearInterval(pidInterval);
+        }
+
+        function updatePidVals() {
+            document.getElementById('kp-val').innerText = document.getElementById('kp').value;
+            document.getElementById('kd-val').innerText = document.getElementById('kd').value;
+        }
+
+        function applyPerturbation() {
+            theta += (Math.random() - 0.5) * 0.4;
+        }
+
+        function initPidSim() {
+            const canvas = document.getElementById('pidCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            if (pidInterval) clearInterval(pidInterval);
+
+            pidInterval = setInterval(() => {
+                const kp = parseFloat(document.getElementById('kp').value);
+                const kd = parseFloat(document.getElementById('kd').value);
+                
+                // Physics: Inverted Pendulum dynamics
+                const g = 9.81;
+                const l = 0.8;
+                
+                // Torque control from PID
+                const torque = - (kp * theta + kd * dTheta);
+                
+                // Angular acceleration
+                const d2Theta = (g / l) * Math.sin(theta) + torque;
+                
+                dTheta += d2Theta * 0.03;
+                theta += dTheta * 0.03;
+                
+                // Damping
+                dTheta *= 0.98;
+
+                // Render Canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Base ground
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(20, 180);
+                ctx.lineTo(280, 180);
+                ctx.stroke();
+
+                // Pivot Point
+                const cx = 150;
+                const cy = 180;
+
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(theta);
+
+                // Drawing inverted pendulum / cube frame
+                ctx.fillStyle = '#38bdf8';
+                ctx.fillRect(-25, -90, 50, 90);
+
+                // Reaction Wheel inside
+                ctx.strokeStyle = '#0284c7';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.arc(0, -45, 18, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.restore();
+
+                // Draw Pivot circle
+                ctx.fillStyle = '#f1f5f9';
+                ctx.beginPath();
+                ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+                ctx.fill();
+
+            }, 30);
+        }
+
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            copyToast('Email copié dans le presse-papier !');
+        }
+
+        function copyToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
